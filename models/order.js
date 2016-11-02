@@ -18,6 +18,10 @@ let OrderSchema = new Schema({
     latitude: Number,
     longitude: Number
   },
+  taken: {
+    type: Boolean,
+    default: false
+  },
   cost: Number,
   createdAt: {
     type: Date,

@@ -58,8 +58,8 @@ router.post('/checkPassword', (req, res) => {
   })
 })
 
-router.get('/getByIDNP/:idnp', (req, res) => {
-  let idnp = req.params.idnp
+router.get('/getByIDNP', (req, res) => {
+  let idnp = req.query.idnp
   Driver.find({ IDNP: idnp}, (err, doc) => {
     if (err) {
       res.json(err)
