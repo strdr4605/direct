@@ -1,0 +1,232 @@
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/order/newOrder
+body:
+{
+	"clientPhoneNumber": "4",
+	"start": {
+		"district": "Ciocana",
+		"address": "Petru Dimo 21/1",
+		"latitude": 47.048488,
+		"longitude": 28.870167
+	},
+	"end": {
+		"district": "Ciocana",
+		"address": "Studenților 9/7",
+		"latitude": 47.061752,
+		"longitude": 28.867122
+	},
+	"cost": 35
+}
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/driver/newDriver
+body:
+{
+	"IDNP": "0000000004123",
+	"password": "maia-mujik",
+	"name": {
+		"firstName": "John",
+		"lastName": "Doe"
+	},
+	"phoneNumber": "99",
+	"carMake": "Dacia",
+	"carModel": "Logan",
+	"carColor": "Albastru",
+	"registrationNumber": "UTM 111",
+	"position": {
+		"latitude": 47.025557,
+		"longitude": 28.830357
+	}
+}
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/driver/checkPassword
+body:
+{
+	"phoneNumber": "10",
+	"password": "maia-mujik"
+}
+
+Response:
+{
+  "value": false
+}
+------------------------------------------------------------
+GET => http://localhost:3000/api/v1/order/getallorders
+Response:
+[
+{
+  "_id": "58198d84396804176b96fc27",
+  "clientPhoneNumber": "4",
+  "cost": 35,
+  "__v": 0,
+  "createdAt": "2016-11-02T06:53:56.525Z",
+  "end": {
+    "district": "Ciocana",
+    "address": "Studenților 9/7",
+    "latitude": 47.061752,
+    "longitude": 28.867122
+  },
+  "start": {
+    "district": "Ciocana",
+    "address": "Petru Dimo 21/1",
+    "latitude": 47.048488,
+    "longitude": 28.870167
+  }
+},
+{
+  "_id": "58198d90396804176b96fc29",
+  "clientPhoneNumber": "4",
+  "cost": 35,
+  "__v": 0,
+  "createdAt": "2016-11-02T06:54:08.614Z",
+  "end": {
+    "district": "Ciocana",
+    "address": "Studenților 9/7",
+    "latitude": 47.061752,
+    "longitude": 28.867122
+  },
+  "start": {
+    "district": "Ciocana",
+    "address": "Petru Dimo 21/1",
+    "latitude": 47.048488,
+    "longitude": 28.870167
+  }
+}
+]
+------------------------------------------------------------
+GET => http://localhost:3000/api/v1/client/getallclients
+Response:
+[
+  {
+    "_id": "5818fbf6f6fd1713d1ad25e1",
+    "phoneNumber": "1",
+    "__v": 0,
+    "orders": [
+      "5818f213d500280f5bbd139d",
+      "58198602f09f9115bef6412b",
+      "58198b3d396804176b96fc23"
+    ],
+    "rating": []
+  },
+  {
+    "_id": "5818fc48764e35141da851ed",
+    "phoneNumber": "2",
+    "__v": 0,
+    "orders": [
+      "5818f7da4bb0cc1217eaabd0"
+    ],
+    "rating": []
+  },
+  {
+    "_id": "58198b4d396804176b96fc26",
+    "phoneNumber": "3",
+    "__v": 0,
+    "orders": [
+      "58198b4d396804176b96fc25"
+    ],
+    "rating": []
+  },
+  {
+    "_id": "58198d84396804176b96fc28",
+    "phoneNumber": "4",
+    "__v": 0,
+    "orders": [
+      "58198d84396804176b96fc27",
+      "58198d90396804176b96fc29"
+    ],
+    "rating": []
+  }
+]
+------------------------------------------------------------
+GET => http://localhost:3000/api/v1/driver/getalldrivers
+Response:
+[
+  {
+    "_id": "58199a4d6a17851bf85a5cde",
+    "IDNP": "0000000000001",
+    "password": "$2a$10$9UsBG6N0XlmmKGvo5GvZheYcSZvOLJzg6O1lQ.YySIqfB85BV5BAy",
+    "phoneNumber": "10",
+    "carMake": "Dacia",
+    "carModel": "Logan",
+    "carColor": "Albastru",
+    "registrationNumber": "UTM 001",
+    "__v": 0,
+    "createdAt": "2016-11-02T07:48:29.601Z",
+    "rating": [],
+    "position": {
+      "latitude": 47.025557,
+      "longitude": 28.830357
+    },
+    "name": {
+      "firstName": "John",
+      "lastName": "Doe"
+    }
+  },
+  {
+    "_id": "5819a0716320bd1e25eab697",
+    "IDNP": "0000000000123",
+    "password": "$2a$10$9EtYPsqV.O8ObHIictOPNux873zM36Jd03DL7ojyYYR5tmOfoBL8C",
+    "phoneNumber": "1111",
+    "carMake": "Dacia",
+    "carModel": "Logan",
+    "carColor": "Albastru",
+    "registrationNumber": "UTM 002",
+    "__v": 0,
+    "createdAt": "2016-11-02T08:14:41.754Z",
+    "rating": [],
+    "position": {
+      "latitude": 47.025557,
+      "longitude": 28.830357
+    },
+    "name": {
+      "firstName": "John",
+      "lastName": "Doe"
+    }
+  },
+  {
+    "_id": "5819a0a26320bd1e25eab699",
+    "IDNP": "0000000004123",
+    "password": "$2a$10$kNDZBpoj/5BvfBlHVEiCXO1su3SqYAVISV.iZdpDWCptCMnR.LEqG",
+    "phoneNumber": "99",
+    "carMake": "Dacia",
+    "carModel": "Logan",
+    "carColor": "Albastru",
+    "registrationNumber": "UTM 111",
+    "__v": 0,
+    "createdAt": "2016-11-02T08:15:30.190Z",
+    "rating": [],
+    "position": {
+      "latitude": 47.025557,
+      "longitude": 28.830357
+    },
+    "name": {
+      "firstName": "John",
+      "lastName": "Doe"
+    }
+  }
+]
+------------------------------------------------------------
+GET => http://localhost:3000/api/v1/driver/getByIDNP/0000000004123
+Response:
+[
+  {
+    "_id": "5819a0a26320bd1e25eab699",
+    "IDNP": "0000000004123",
+    "password": "$2a$10$kNDZBpoj/5BvfBlHVEiCXO1su3SqYAVISV.iZdpDWCptCMnR.LEqG",
+    "phoneNumber": "99",
+    "carMake": "Dacia",
+    "carModel": "Logan",
+    "carColor": "Albastru",
+    "registrationNumber": "UTM 111",
+    "__v": 0,
+    "createdAt": "2016-11-02T08:15:30.190Z",
+    "rating": [],
+    "position": {
+      "latitude": 47.025557,
+      "longitude": 28.830357
+    },
+    "name": {
+      "firstName": "John",
+      "lastName": "Doe"
+    }
+  }
+]

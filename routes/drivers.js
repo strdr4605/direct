@@ -60,6 +60,17 @@ router.post('/checkPassword', (req, res) => {
   })
 })
 
+router.get('/getByIDNP/:idnp', (req, res) => {
+  let idnp = req.params.idnp
+  Driver.find({ IDNP: idnp}, (err, doc) => {
+    if (err) {
+      res.json(err)
+    } else {
+      res.json(doc)
+    }
+  })
+})
+
 // End POST
 
 // Start DELETE
