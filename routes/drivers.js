@@ -1,6 +1,6 @@
 const router = require('express').Router(),
       Driver = require('../models/driver'),
-      bcrypt = require('bcrypt'),
+      bcrypt = require('bcryptjs'),
       SALT_WORK_FACTOR = 10
 
 // Start GET
@@ -51,8 +51,6 @@ router.post('/newDriver', (req, res) => {
 router.post('/checkPassword', (req, res) => {
   let driverLogin = req.body
   Driver.findOne({phoneNumber: driverLogin.phoneNumber}, (err, doc) => {
-    console.log('hash = ' + doc.password)
-    console.log('password to check = ' + driverLogin.password)
       bcrypt.compare(driverLogin.password, doc.password, (err, result) => {
       if(result) res.send({value: true})
       else res.send({value: false})
