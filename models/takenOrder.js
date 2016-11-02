@@ -5,6 +5,7 @@ let takenOrderSchema = new Schema({
   orderId: {
    type: Schema.Types.ObjectId,
    required: true,
+   unique: true
   },
   driverId: {
    type: Schema.Types.ObjectId,
@@ -13,7 +14,7 @@ let takenOrderSchema = new Schema({
   timeToArrive:{
     type: Number,
     required: true
-  },  
+  },
   finishedAt: Date,
   createdAt: {
     type: Date,
