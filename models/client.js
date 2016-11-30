@@ -4,7 +4,13 @@ const mongoose = require('mongoose'),
 let ClientSchema = new Schema({
   phoneNumber: String,
   rating: {
-    type: [Number],
+    type: [{
+      driverIDNP: {
+       type: String,
+       unique: true
+      },
+      mark: Number
+    }],
     default: []
   },
   orders: {

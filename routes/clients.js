@@ -34,6 +34,33 @@ router.post('/newClient', (req, res) => {
 
 })
 
+router.post('/login', (req, res) => {
+  let clientLogin = req.body
+  Client.findOne({phoneNumber: clientLogin.phoneNumber}, (err, doc) => {
+      if (doc) {
+        res.send(doc)
+      }
+      else res.send({value: false})
+  })
+})
+
+router.post('/rate', (req, res) => {
+  let newRating = req.body
+  Client.findOne({phoneNumber: newRating.clientPhoneNumber}, (err, doc) => {
+      if (doc) {
+        Client.update(
+          {phoneNumber: newRating.clientPhoneNumber},
+          { $addToSet: { rating: { driverIDNP: newRating.driverIDNP, mark: newRating.mark} } },
+          (err, numAffected) => {
+            if (err) throw err
+            console.log(numAffected)
+            res.send({value: true})
+          })
+      }
+      else res.send({value: false})
+  })
+})
+
 // End POST
 
 // Start DELETE

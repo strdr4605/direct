@@ -48,13 +48,15 @@ router.post('/newDriver', (req, res) => {
   })
 })
 
-router.post('/checkPassword', (req, res) => {
+router.post('/login', (req, res) => {
   let driverLogin = req.body
-  Driver.findOne({phoneNumber: driverLogin.phoneNumber}, (err, doc) => {
-      bcrypt.compare(driverLogin.password, doc.password, (err, result) => {
-      if(result) res.send({value: true})
+  Driver.findOne({IDNP: driverLogin.IDNP}, (err, doc) => {
+      if (doc) {
+        bcrypt.compare(driverLogin.password, doc.password, (err, result) => {
+          if(result) res.send(doc)
+        })
+      }
       else res.send({value: false})
-    })
   })
 })
 
@@ -66,6 +68,23 @@ router.get('/getByIDNP', (req, res) => {
     } else {
       res.json(doc)
     }
+  })
+})
+
+router.post('/rate', (req, res) => {
+  let newRating = req.body
+  Driver.findOne({IDNP: newRating.IDNP}, (err, doc) => {
+      if (doc) {
+        Driver.update(
+          {IDNP: newRating.IDNP},
+          { $addToSet: { rating: { clientPhoneNumber: newRating.clientPhoneNumber, mark: newRating.mark} } },
+          (err, numAffected) => {
+            if (err) throw err
+            console.log(numAffected)
+            res.send({value: true})
+          })
+      }
+      else res.send({value: false})
   })
 })
 

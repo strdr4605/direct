@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 mongoose.connect(config.database, (err) => {
+  if (err) throw err
   console.log('Successfuly connected to ' + config.database)
 })
 mongoose.Promise = global.Promise

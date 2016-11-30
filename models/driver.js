@@ -55,7 +55,13 @@ var DriverSchema = new Schema({
       longitude: Number
     },
     rating: {
-      type: [Number],
+      type: [{
+        clientPhoneNumber: {
+         type: String,
+         unique: true
+        },
+        mark: Number
+      }],
       default: []
     },
     createdAt: {
