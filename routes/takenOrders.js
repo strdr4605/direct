@@ -40,7 +40,17 @@ router.post('/newTakenOrder', (req, res) => {
       res.send({message: 'TakenOrder created'})
     }
   })
+})
 
+router.post('/finish', (req, res) => {
+  let finishTakenOrder = req.body
+  TakenOrder.update(
+    { _id: finishTakenOrder.takenOrderId },
+    { $set: {finishedAt: Date.now()}},
+    (err, numAffected) => {
+      if (err) res.send(err)
+    })
+    res.send({message: `TakenOrder ${finishTakenOrder.takenOrderId} finished`})
 })
 
 // End POST
