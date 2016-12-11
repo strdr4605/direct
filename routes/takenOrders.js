@@ -28,7 +28,7 @@ router.post('/newTakenOrder', (req, res) => {
 
   newTakenOrder.save((err, doc) => {
     if (err) {
-      res.send({error: 'TakenOrder'})
+      res.send(err)
     } else {
       Order.update(
         { _id: takenOrder.orderId },
