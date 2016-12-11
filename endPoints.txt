@@ -38,18 +38,6 @@ body:
 	}
 }
 ------------------------------------------------------------
-POST => http://localhost:3000/api/v1/driver/checkPassword
-body:
-{
-	"phoneNumber": "10",
-	"password": "maia-mujik"
-}
-
-Response:
-{
-  "value": false
-}
-------------------------------------------------------------
 GET => http://localhost:3000/api/v1/order/getallorders
 Response:
 [
@@ -228,5 +216,55 @@ Response:
       "firstName": "John",
       "lastName": "Doe"
     }
+  }
+]
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/client/login
+body:
+{
+	"phoneNumber": "1"
+}
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/client/rate
+body:
+{
+	"driverIDNP": "0000000004123",
+	"clientPhoneNumber": "1",
+	"mark": 4
+}
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/driver/rate
+body:
+{
+	"IDNP": "9990000000002",
+	"clientPhoneNumber": "11111",
+	"mark": 4
+}
+------------------------------------------------------------
+POST => http://localhost:3000/api/v1/driver/login
+body:
+{
+	"IDNP": "0000000000001",
+	"password": "maia-mujik"
+}
+------------------------------------------------------------
+POST => http://46.101.217.4:3000/api/v1/takenorder/newtakenOrder
+body:
+{
+	"orderId": "584d4b5696a2fb3ca3bb31f7",
+	"driverId": "5835fad142598c1d463309cb",
+	"timeToArrive": 5
+}
+-------------------------------------------------------------
+GET => http://46.101.217.4:3000/api/v1/takenorder/getalltakenorders
+Response:
+[
+  {
+    "_id": "584d4ccd96a2fb3ca3bb31fa",
+    "orderId": "584d4b5696a2fb3ca3bb31f7",
+    "driverId": "5835fad142598c1d463309cb",
+    "timeToArrive": 5,
+    "__v": 0,
+    "createdAt": "2016-12-11T12:55:41.598Z"
   }
 ]

@@ -15,7 +15,10 @@ let takenOrderSchema = new Schema({
     type: Number,
     required: true
   },
-  finishedAt: Date,
+  finishedAt: {
+    type: Date,
+    default: null
+  },
   createdAt: {
     type: Date,
     default: Date.now
