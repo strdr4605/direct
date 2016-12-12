@@ -23,6 +23,10 @@ let OrderSchema = new Schema({
     default: false
   },
   cost: Number,
+  clientDeviceToken: {
+    type: String,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now

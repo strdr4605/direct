@@ -268,3 +268,9 @@ Response:
     "createdAt": "2016-12-11T12:55:41.598Z"
   }
 ]
+-------------------------------------------------------------
+POST => http://46.101.217.4:3000/api/v1/takenorder/finish
+body:
+{
+	"takenOrderId": "584d67c3fc835e752e6d162c"
+}
