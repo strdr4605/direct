@@ -2,7 +2,7 @@ const router = require('express').Router(),
       TakenOrder = require('../models/takenOrder')
       Order = require('../models/order'),
       gcm = require('node-gcm'),
-      config = require('./config')
+      config = require('../config')
 
 // GCM Push Notification
 
