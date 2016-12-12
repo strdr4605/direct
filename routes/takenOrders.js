@@ -54,7 +54,11 @@ router.post('/newTakenOrder', (req, res) => {
             message.addNotification('title', `Your Order was taken. Driver time to arrive ${takenOrder.timeToArrive}`)
             sender.send(message, { registrationTokens: regTokens }, function (err, response) {
                 if (err) res.json(err)
-                else console.log(response);
+                else {
+                  console.log(response)
+                  console.log(`apiKey --> ${config.gcmApiKey}`)
+                  console.log(`taken ==> ${regTokens}`)
+                }
             })
             message = new gcm.Message()
             regTokens = []
