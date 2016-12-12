@@ -50,7 +50,7 @@ router.post('/newTakenOrder', (req, res) => {
           if (err) {
             res.json(err)
           } else {
-            regTokens.push(doc.clientDeviceToken)
+            regTokens.push(doc[0].toObject().clientDeviceToken)
             message.addNotification('title', `Your Order was taken. Driver time to arrive ${takenOrder.timeToArrive}`)
             sender.send(message, { registrationTokens: regTokens }, function (err, response) {
                 if (err) res.json(err)
@@ -89,7 +89,7 @@ router.post('/arrived', (req, res) => {
       if (err) {
         res.json(err)
       } else {
-        regTokens.push(doc.clientDeviceToken)
+        regTokens.push(doc[0].toObject().clientDeviceToken)
         message.addNotification('title', 'Driver arrived')
         sender.send(message, { registrationTokens: regTokens }, function (err, response) {
             if (err) res.json(err);
