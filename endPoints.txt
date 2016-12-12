@@ -2,20 +2,21 @@
 POST => http://localhost:3000/api/v1/order/newOrder
 body:
 {
-	"clientPhoneNumber": "4",
+	"clientPhoneNumber": "1",
 	"start": {
-		"district": "Ciocana",
-		"address": "Petru Dimo 21/1",
+		"district": "Râșcani",
+		"address": "Nicolae Dimo 21/1",
 		"latitude": 47.048488,
 		"longitude": 28.870167
 	},
 	"end": {
-		"district": "Ciocana",
+		"district": "Râșcani",
 		"address": "Studenților 9/7",
 		"latitude": 47.061752,
 		"longitude": 28.867122
 	},
-	"cost": 35
+	"cost": 35,
+	"clientDeviceToken": "myFirstToken"
 }
 ------------------------------------------------------------
 POST => http://localhost:3000/api/v1/driver/newDriver
@@ -254,6 +255,13 @@ body:
 	"orderId": "584d4b5696a2fb3ca3bb31f7",
 	"driverId": "5835fad142598c1d463309cb",
 	"timeToArrive": 5
+}
+-------------------------------------------------------------
+POST => http://46.101.217.4:3000/api/v1/takenorder/arrived
+body:
+{
+	"orderId": "584d4b5696a2fb3ca3bb31f7",
+	"driverId": "5835fad142598c1d463309cb"
 }
 -------------------------------------------------------------
 GET => http://46.101.217.4:3000/api/v1/takenorder/getalltakenorders

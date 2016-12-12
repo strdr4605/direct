@@ -1,7 +1,14 @@
 const router = require('express').Router(),
       TakenOrder = require('../models/takenOrder')
-      Order = require('../models/order')
+      Order = require('../models/order'),
+      gcm = require('node-gcm'),
+      config = require('./config')
 
+// GCM Push Notification
+
+var sender = new gcm.Sender(config.gcmApiKey)
+var message = new gcm.Message()
+var regTokens = []
 // Start GET
 
 router.get('/', (req, res) => {
@@ -37,6 +44,23 @@ router.post('/newTakenOrder', (req, res) => {
           if (err) throw err
           console.log(numAffected)
       })
+      Order.find(
+        { _id: takenOrder.orderId },
+        (err, doc) => {
+          if (err) {
+            res.json(err)
+          } else {
+            regTokens.push(doc.clientDeviceToken)
+            message.addNotification('title', `Your Order was taken. Driver time to arrive ${takenOrder.timeToArrive}`)
+            sender.send(message, { registrationTokens: regTokens }, function (err, response) {
+                if (err) console.error(err);
+                else console.log(response);
+            })
+            message = new gcm.Message()
+            regTokens = []
+          }
+        }
+      )
       res.send({message: 'TakenOrder created'})
     }
   })
@@ -51,6 +75,27 @@ router.post('/finish', (req, res) => {
       if (err) res.send(err)
     })
     res.send({message: `TakenOrder ${finishTakenOrder.takenOrderId} finished`})
+})
+
+router.post('/arrived', (req, res) => {
+  let arrivedTakenOrder = req.body
+  Order.find(
+    { _id: arrivedTakenOrder.orderId },
+    (err, doc) => {
+      if (err) {
+        res.json(err)
+      } else {
+        regTokens.push(doc.clientDeviceToken)
+        message.addNotification('title', 'Driver arrived')
+        sender.send(message, { registrationTokens: regTokens }, function (err, response) {
+            if (err) console.error(err);
+            else console.log(response);
+        })
+        message = new gcm.Message()
+        regTokens = []
+      }
+    }
+  )
 })
 
 // End POST
