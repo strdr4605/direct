@@ -94,6 +94,7 @@ router.post('/rate', (req, res) => {
 
 router.delete('/deleteAll', (req, res) => {
   Driver.remove({}, (err, doc) => {
+    if (err) res.json(err)
     console.log(doc);
   });
   res.json({success: true})

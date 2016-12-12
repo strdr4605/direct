@@ -27,7 +27,7 @@ router.post('/newClient', (req, res) => {
   let newClient = Client(client)
 
   newClient.save((err) => {
-    if (err) throw err
+    if (err) res.json(err)
     console.log('Client created')
     res.send({message: 'Client created'})
   })
@@ -52,7 +52,7 @@ router.post('/rate', (req, res) => {
           {phoneNumber: newRating.clientPhoneNumber},
           { $addToSet: { rating: { driverIDNP: newRating.driverIDNP, mark: newRating.mark} } },
           (err, numAffected) => {
-            if (err) throw err
+            if (err) res.json(err)
             console.log(numAffected)
             res.send({value: true})
           })

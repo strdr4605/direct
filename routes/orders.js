@@ -63,14 +63,14 @@ router.post('/newOrder', (req, res) => {
 
   let newOrder = Order(order)
   newOrder.save( function (err, doc) {
-    if (err) throw err
+    if (err) res.json(err)
     let orderId = doc._id
     let clientPhoneNumber = order.clientPhoneNumber
     Client.findOne({phoneNumber: clientPhoneNumber}, (err, doc) => {
       let newClient = Client({phoneNumber: clientPhoneNumber, orders: [orderId]})
       if (!doc) {
         newClient.save(function (err) {
-          if (err) throw err
+          if (err) res.json(err)
           console.log('Client created!')
         })
       }
@@ -79,7 +79,7 @@ router.post('/newOrder', (req, res) => {
           {phoneNumber: clientPhoneNumber},
           { $addToSet: { orders: orderId } },
           (err, numAffected) => {
-            if (err) throw err
+            if (err) res.json(err)
             console.log(numAffected)
           })
       }

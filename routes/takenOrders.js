@@ -35,13 +35,13 @@ router.post('/newTakenOrder', (req, res) => {
 
   newTakenOrder.save((err, doc) => {
     if (err) {
-      res.send(err)
+      res.json(err)
     } else {
       Order.update(
         { _id: takenOrder.orderId },
         { $set: {taken: true} },
         (err, numAffected) => {
-          if (err) throw err
+          if (err) res.json(err)
           console.log(numAffected)
       })
       Order.find(
@@ -53,7 +53,7 @@ router.post('/newTakenOrder', (req, res) => {
             regTokens.push(doc.clientDeviceToken)
             message.addNotification('title', `Your Order was taken. Driver time to arrive ${takenOrder.timeToArrive}`)
             sender.send(message, { registrationTokens: regTokens }, function (err, response) {
-                if (err) console.error(err);
+                if (err) res.json(err)
                 else console.log(response);
             })
             message = new gcm.Message()
@@ -88,7 +88,7 @@ router.post('/arrived', (req, res) => {
         regTokens.push(doc.clientDeviceToken)
         message.addNotification('title', 'Driver arrived')
         sender.send(message, { registrationTokens: regTokens }, function (err, response) {
-            if (err) console.error(err);
+            if (err) res.json(err);
             else console.log(response);
         })
         message = new gcm.Message()
