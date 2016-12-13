@@ -55,7 +55,7 @@ router.post('/newTakenOrder', (req, res) => {
             sender.send(message, { registrationTokens: regTokens }, function (err, response) {
                 if (err) res.json(err)
                 else {
-                  res.send([{ message: 'TakenOrder created' }, response])
+                  res.send(response)
                 }
             })
             message = new gcm.Message()
