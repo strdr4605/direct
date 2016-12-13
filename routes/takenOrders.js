@@ -63,7 +63,6 @@ router.post('/newTakenOrder', (req, res) => {
           }
         }
       )
-      res.send({message: 'TakenOrder created'})
     }
   })
 })
