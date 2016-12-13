@@ -50,14 +50,12 @@ router.post('/newTakenOrder', (req, res) => {
           if (err) {
             res.json(err)
           } else {
-            regTokens.push(doc[0].toObject().clientDeviceToken)
+            regTokens.push(doc[0].clientDeviceToken)
             message.addNotification('title', `Your Order was taken. Driver time to arrive ${takenOrder.timeToArrive}`)
             sender.send(message, { registrationTokens: regTokens }, function (err, response) {
                 if (err) res.json(err)
                 else {
-                  console.log(response)
-                  console.log(`apiKey --> ${config.gcmApiKey}`)
-                  console.log(`taken ==> ${regTokens}`)
+                  res.send([{ message: 'TakenOrder created' }, response])
                 }
             })
             message = new gcm.Message()
